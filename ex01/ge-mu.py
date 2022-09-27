@@ -34,7 +34,7 @@ def kaitou ():
     else:
         print("正解！　では何が欠損していますか？一文字ずつ回答してください")
         for i in range (num_ch):
-            a=input(f"{i+1}文字目を入力して下さい")
+            a=input(f"{i+1}文字目を入力して下い")
             if a not in chm:
                 print("残念")
                 break
