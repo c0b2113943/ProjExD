@@ -41,6 +41,8 @@ def kaitou ():
             else:
                 print("正解")
                 chm.remove(a)
+        else:
+            print("クリアー")
             
             
 
