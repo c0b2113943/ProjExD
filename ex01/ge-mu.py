@@ -42,6 +42,7 @@ def kaitou ():
                 print("正解")
                 chm.remove(a)
             
+            
 
 shutudai()
 print()
