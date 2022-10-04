@@ -24,9 +24,12 @@ def click_eq(event):  #7
     entry.delete(0,tk.END)
     entry.insert(tk.END, ans)
 
+def click_del(event):         #消去
+    entry.delete(0,tk.END)
+    
 
 root =tk.Tk()               #練習１
-root.geometry("400x600")
+root.geometry("400x620")
 
 entry=tk.Entry(root,width=14,font=("Times New Roman",40),justify="right")#練習４
 entry.grid(row=0, column=0, columnspan=4)
@@ -58,6 +61,9 @@ btn = tk.Button(root, text=".", font=("", 30), width=4, height=2)#小数
 btn.bind("<1>", click2)
 btn.grid(row=4, column=1)
 
+btn = tk.Button(root, text="del", font=("", 30), width=4, height=2)#消去
+btn.bind("<1>", click_del)
+btn.grid(row=5, column=3)
 
 
 btn = tk.Button(root, text="=", font=("", 30), width=4, height=2)#7
