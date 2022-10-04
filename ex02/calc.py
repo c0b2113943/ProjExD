@@ -40,10 +40,7 @@ def click_x(event):     #二乗
     ans=ans*ans
     entry.delete(0,tk.END)
     entry.insert(tk.END, ans)
-    
-   
-    
-    
+        
 
 root =tk.Tk()               #練習１
 root.geometry("400x620")
@@ -65,15 +62,19 @@ for i, num in enumerate(range(9,-1, -1), 1):  #練習２
 btn = tk.Button(root, text="+", font=("", 30), width=4, height=2)#6
 btn.bind("<1>", click2)
 btn.grid(row=4, column=3)
+
 btn = tk.Button(root, text="-", font=("", 30), width=4, height=2)#引き算
 btn.bind("<1>", click2)
 btn.grid(row=3, column=3)
+
 btn = tk.Button(root, text="×", font=("", 30), width=4, height=2)#掛け算
 btn.bind("<1>", click2)
 btn.grid(row=1, column=3)
+
 btn = tk.Button(root, text="÷", font=("", 30), width=4, height=2)#割り算
 btn.bind("<1>", click2)
 btn.grid(row=2, column=3)
+
 btn = tk.Button(root, text=".", font=("", 30), width=4, height=2)#小数
 btn.bind("<1>", click2)
 btn.grid(row=4, column=1)
