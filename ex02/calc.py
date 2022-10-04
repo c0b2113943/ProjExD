@@ -34,6 +34,12 @@ def click_del1(event):     #一文字消去
     entry.delete(0,tk.END)
     entry.insert(tk.END, ans)
 
+def click_x(event):     #二乗
+    get=entry.get()
+    ans=int(get)
+    ans=ans*ans
+    entry.delete(0,tk.END)
+    entry.insert(tk.END, ans)
     
    
     
@@ -72,11 +78,11 @@ btn = tk.Button(root, text=".", font=("", 30), width=4, height=2)#小数
 btn.bind("<1>", click2)
 btn.grid(row=4, column=1)
 
-btn = tk.Button(root, text="AC", font=("", 30), width=4, height=2)#消去
+btn = tk.Button(root, text="AC", font=("", 30), width=4, height=2,bg="red")#全消去
 btn.bind("<1>", click_del)
 btn.grid(row=5, column=2)
 
-btn = tk.Button(root, text="C", font=("", 30), width=4, height=2)#消去
+btn = tk.Button(root, text="C", font=("", 30), width=4, height=2,bg="#ffffcc")#一文字消去
 btn.bind("<1>", click_del1)
 btn.grid(row=5, column=3)
 
@@ -84,5 +90,9 @@ btn.grid(row=5, column=3)
 btn = tk.Button(root, text="=", font=("", 30), width=4, height=2)#7
 btn.bind("<1>", click_eq)
 btn.grid(row=4, column=2)
+
+btn = tk.Button(root, text="x^2", font=("", 30), width=4, height=2)# 二乗
+btn.bind("<1>", click_x)
+btn.grid(row=5, column=1)
 
 root.mainloop()
