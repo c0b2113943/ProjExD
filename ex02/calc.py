@@ -7,12 +7,14 @@ import tkinter.messagebox as tkm
 def click(event):  #練習３
     btn = event.widget
     num = int(btn["text"])
-    tkm.showinfo(f"{num}", f"「{num}のボタンが押されました」")
+    #tkm.showinfo(f"{num}", f"「{num}のボタンが押されました」")
+    entry.insert(tk.END, num)
 
 root =tk.Tk()               #練習１
 root.geometry("300x500")
 
 entry=tk.Entry(root,width=10,font=("Times New Roman",40),justify="right")#練習４
+
 entry.grid(row=0, column=0, columnspan=3)
 
 
