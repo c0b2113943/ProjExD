@@ -1,3 +1,4 @@
+from ast import Delete
 from cProfile import label
 import tkinter as tk
 import tkinter.messagebox as tkm
@@ -15,11 +16,17 @@ def click2(event):  #6
     num = str(btn["text"])
     entry.insert(tk.END, num) 
 
+def click_eq(event):  #7
+    get=entry.get()
+    ans=eval(get)
+    entry.delete(0,tk.END)
+    entry.insert(tk.END, ans)
+
+
 root =tk.Tk()               #練習１
 root.geometry("300x500")
 
 entry=tk.Entry(root,width=10,font=("Times New Roman",40),justify="right")#練習４
-
 entry.grid(row=0, column=0, columnspan=3)
 
 
@@ -33,8 +40,12 @@ for i, num in enumerate(range(9,-1, -1), 1):  #練習２
         r += 1
         c = 0
 
-btn = tk.Button(root, text="+", font=("", 30), width=4, height=2)
+btn = tk.Button(root, text="+", font=("", 30), width=4, height=2)#6
 btn.bind("<1>", click2)
 btn.grid(row=4, column=1)
+
+btn = tk.Button(root, text="=", font=("", 30), width=4, height=2)#7
+btn.bind("<1>", click_eq)
+btn.grid(row=4, column=2)
 
 root.mainloop()
