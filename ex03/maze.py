@@ -1,5 +1,6 @@
 import tkinter as tk
-
+cx=300
+cy=400
 root=tk.Tk()
 root.title("迷えるこうかとん")
 canvas=tk.Canvas(
@@ -10,4 +11,7 @@ canvas=tk.Canvas(
 )
 
 canvas.pack()
+
+tori=tk.PhotoImage(file="ex03/fig/5.png")
+canvas.create_image(cx,cy,image=tori,tag="tori")
 root.mainloop()
