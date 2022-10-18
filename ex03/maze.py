@@ -36,20 +36,22 @@ def main_proc():             #ノーマルモードでの動き（道を進む�
     if key=="Up":
         if maze_list[my-1][mx]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             my-=1
-            cy-=100
+            #cy-=100
     elif key=="Down":
         if maze_list[my+1][mx]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             my+=1
-            cy+=100
+            #cy+=100
     elif key=="Left":
         if maze_list[my][mx-1]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             mx-=1
-            cx-=100
+            #cx-=100
     elif key=="Right":
         if maze_list[my][mx+1]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             mx+=1
-            cx+=100
+            #cx+=100
     #print(f"{mx}")
+    cx = mx*100 + 50
+    cy = my*100 + 50
     canvas.coords("tori",cx,cy)
 
 
