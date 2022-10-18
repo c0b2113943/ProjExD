@@ -1,8 +1,10 @@
 import tkinter as tk
 import maze_maker
-cx=300
-cy=400
+cx=150
+cy=150
 key=""
+mx=1
+my=1
 
 def key_down(event):
     global key
@@ -14,15 +16,19 @@ def key_up(event):
     key=""
 
 def main_proc():
-    global key,cx,cy
+    global key,cx,cy,mx,my
     if key=="Up":
-        cy-=20
+        cy-=100
+        my-=1
     elif key=="Down":
-        cy+=20
+        cy+=100
+        my+=1
     elif key=="Left":
-        cx-=20
+        cx-=100
+        mx-=1
     elif key=="Right":
-        cx+=20
+        mx-=1
+        cx+=100
     canvas.coords("tori",cx,cy)
 
 
