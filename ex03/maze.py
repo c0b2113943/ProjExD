@@ -1,13 +1,10 @@
 import tkinter as tk
 import maze_maker
 from random import randint
-cx=150
-cy=150
+cx,cy=150,150
 key=""
-mx=1
-my=1
-ans1=0
-ans2=0
+mx,my=1,1
+ans1,ans2=0,0
 mod=0
 kai=1
 
