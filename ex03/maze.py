@@ -14,7 +14,7 @@ def key_down(event):
     global key,mod
     key=event.keysym
     if key=="w":     #モード切替
-            mod=1   #壁モード
+        mod=1        #壁モード
     if key=="n":
         mod=0      #ノーマルモード
     restert()
@@ -35,15 +35,15 @@ def main_proc():             #ノーマルモードでの動き（道を進む�
             my-=1
             cy-=100
     elif key=="Down":
-        if maze_list[my+1][mx]==0:#動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
+        if maze_list[my+1][mx]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             my+=1
             cy+=100
     elif key=="Left":
-        if maze_list[my][mx-1]==0:#動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
+        if maze_list[my][mx-1]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             mx-=1
             cx-=100
     elif key=="Right":
-        if maze_list[my][mx+1]==0:#動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
+        if maze_list[my][mx+1]==0: #動こうとしている先のmaze_list（０と１の行列）を見て道なら現在位置を更新する
             mx+=1
             cx+=100
     #print(f"{mx}")
@@ -82,7 +82,8 @@ def restert():                      #Rキーを押したときに再起動する
             150,
             40 ,
             font=("", 20),
-            text="[Nキー]ノーマルモード\n[Wキー]壁モード\n[Rキー]再起動")
+            text="[Nキー]ノーマルモード\n[Wキー]壁モード\n[Rキー]再起動"
+            )
         canvas.lift("tori",)  #こうかとんを前面に持ってくる
         mod=0
         makea_goll()
