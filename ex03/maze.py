@@ -38,7 +38,7 @@ canvas=tk.Canvas(
 canvas.pack()
 
 maze_list=maze_maker.make_maze(15,9)
-maze_maker.show_maze(canvas,maze_list)
+
 
 tori=tk.PhotoImage(file="ex03/fig/5.png")
 canvas.create_image(cx,cy,image=tori,tag="tori")
