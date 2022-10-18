@@ -58,7 +58,7 @@ def main_proc():             #ノーマルモードでの動き（道を進む�
 
 
 def main_proc2():               #壁モードの動き（壁の中を動く。道は進めない）
-    global key,mx,my,cx,cy,mod
+    global mx,my,cx,cy,mod
     if key=="Up":
         if maze_list[my-1][mx]==1 :#動こうとしている先のmaze_list（０と１の行列）を見て壁なら現在位置を更新する
             my-=1
