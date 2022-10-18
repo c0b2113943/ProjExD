@@ -10,6 +10,8 @@ ans1=0
 ans2=0
 mod=0
 kai=1
+
+
 def key_down(event):
     global key,mod
     key=event.keysym
@@ -24,9 +26,13 @@ def key_down(event):
         main_proc()
     goal()
 
+
+
 def key_up(event):
     global key
     key=""
+
+
 
 def main_proc():             #ノーマルモードでの動き（道を進む）
     global key,mx,my,cx,cy
@@ -49,6 +55,8 @@ def main_proc():             #ノーマルモードでの動き（道を進む�
     #print(f"{mx}")
     canvas.coords("tori",cx,cy)
 
+
+
 def main_proc2():               #壁モードの動き（壁の中を動く。道は進めない）
     global key,mx,my,cx,cy,mod
     if key=="Up":
@@ -69,6 +77,8 @@ def main_proc2():               #壁モードの動き（壁の中を動く。�
             cx+=100
     canvas.coords("tori",cx,cy)
 
+
+    
 def restert():                      #ゴールをしRキーを押したときに再起動する
     global cx ,cy,key,mx,my,maze_list,tori,mod,kai
     if key=="r"and ans1==my and ans2==mx:
@@ -88,6 +98,8 @@ def restert():                      #ゴールをしRキーを押したときに
         canvas.lift("tori",)  #こうかとんを前面に持ってくる
         mod=0
         makea_goll()
+
+
 
 def makea_goll():             #ゴールを作成する。道であり三方を壁に囲まれた行き止まりをゴールの候補として得る。
     global maze_list,ans1,ans2
@@ -112,6 +124,8 @@ def makea_goll():             #ゴールを作成する。道であり三方を�
     canvas.create_rectangle(ans2*100, ans1*100, ans2*100+100,ans1*100+100 , fill = 'red',tag="red") #選ばれたゴールの場所を赤くする
     canvas.lift("tori","red")   #こうかとんを前面に持ってくる
 
+
+    
 def goal():        #ゴール判定
     global ans1,ans2,mx,my,maze_list,kai
     if ans1==my and ans2==mx:       #上で選ばれゴールについたらメッセ時を表示
@@ -122,6 +136,8 @@ def goal():        #ゴール判定
             text=f"    {kai}階層クリア！\n[Rキー]で{kai+1}層へ"
         )
         maze_list=2      #全てを壁でも道でも無いものにし、動けなくする
+        
+
         
 root=tk.Tk()
 root.title("迷えるこうかとん")
