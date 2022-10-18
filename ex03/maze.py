@@ -9,7 +9,7 @@ my=1
 ans1=0
 ans2=0
 mod=0
-
+kai=1
 def key_down(event):
     global key,mod
     key=event.keysym
@@ -52,7 +52,7 @@ def main_proc():             #ノーマルモードでの動き（道を進む�
 def main_proc2():               #壁モードの動き（壁の中を動く。道は進めない）
     global key,mx,my,cx,cy,mod
     if key=="Up":
-        if maze_list[my-1][mx]==1:#動こうとしている先のmaze_list（０と１の行列）を見て壁なら現在位置を更新する
+        if maze_list[my-1][mx]==1 :#動こうとしている先のmaze_list（０と１の行列）を見て壁なら現在位置を更新する
             my-=1
             cy-=100
     elif key=="Down":
@@ -69,9 +69,10 @@ def main_proc2():               #壁モードの動き（壁の中を動く。�
             cx+=100
     canvas.coords("tori",cx,cy)
 
-def restert():                      #Rキーを押したときに再起動する
-    global cx ,cy,key,mx,my,maze_list,tori,mod
-    if key=="r":
+def restert():                      #ゴールをしRキーを押したときに再起動する
+    global cx ,cy,key,mx,my,maze_list,tori,mod,kai
+    if key=="r"and ans1==my and ans2==mx:
+        kai+=1
         maze_list=maze_maker.make_maze(15,9)   #新しいmaze_list（０と１の行列）を使い描画し直す
         maze_maker.show_maze(canvas,maze_list) 
         cx=150
@@ -82,7 +83,7 @@ def restert():                      #Rキーを押したときに再起動する
             150,
             40 ,
             font=("", 20),
-            text="[Nキー]ノーマルモード\n[Wキー]壁モード\n[Rキー]再起動"
+            text=f"[Nキー]ノーマルモード\n[Wキー]壁モード\n{kai}階"
             )
         canvas.lift("tori",)  #こうかとんを前面に持ってくる
         mod=0
@@ -112,13 +113,13 @@ def makea_goll():             #ゴールを作成する。道であり三方を�
     canvas.lift("tori","red")   #こうかとんを前面に持ってくる
 
 def goal():        #ゴール判定
-    global ans1,ans2,mx,my,maze_list
+    global ans1,ans2,mx,my,maze_list,kai
     if ans1==my and ans2==mx:       #上で選ばれゴールについたらメッセ時を表示
         canvas.create_text(        
             1500 // 2,
             900 // 2,
             font=("", 80),
-            text="       ゲームクリア！\n[Rキー]で再起動してね"
+            text=f"    {kai}階層クリア！\n[Rキー]で{kai+1}層へ"
         )
         maze_list=2      #全てを壁でも道でも無いものにし、動けなくする
         
@@ -145,6 +146,6 @@ canvas.create_text(
             150,
             40 ,
             font=("", 20),
-            text="[Nキー]ノーマルモード\n[Wキー]壁モード\n[Rキー]再起動")
+            text=f"[Nキー]ノーマルモード\n[Wキー]壁モード\n{kai}階")
 makea_goll()
 root.mainloop()
