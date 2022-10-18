@@ -1,4 +1,5 @@
 import tkinter as tk
+import maze_maker
 cx=300
 cy=400
 key=""
