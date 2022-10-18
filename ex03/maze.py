@@ -6,10 +6,24 @@ key=""
 def key_down(event):
     global key
     key=event.keysym
+    main_proc()
 
 def key_up(event):
     global key
     key=""
+
+def main_proc():
+    global key,cx,cy
+    if key=="Up":
+        cy-=20
+    elif key=="Down":
+        cy+=20
+    elif key=="Left":
+        cx-=20
+    elif key=="Right":
+        cx+=20
+    canvas.coords("tori",cx,cy)
+
 
 root=tk.Tk()
 root.title("迷えるこうかとん")
