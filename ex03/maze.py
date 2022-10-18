@@ -16,19 +16,24 @@ def key_up(event):
     key=""
 
 def main_proc():
-    global key,cx,cy,mx,my
+    global key,mx,my,cx,cy
     if key=="Up":
-        cy-=100
-        my-=1
+        if maze_list[my-1][mx]==0:
+            my-=1
+            cy-=100
     elif key=="Down":
-        cy+=100
-        my+=1
+        if maze_list[my+1][mx]==0:
+            my+=1
+            cy+=100
     elif key=="Left":
-        cx-=100
-        mx-=1
+        if maze_list[my][mx-1]==0:
+            mx-=1
+            cx-=100
     elif key=="Right":
-        mx-=1
-        cx+=100
+        if maze_list[my][mx+1]==0:
+            mx+=1
+            cx+=100
+    #print(f"{mx}")
     canvas.coords("tori",cx,cy)
 
 
