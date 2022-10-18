@@ -1,6 +1,8 @@
 import tkinter as tk
 cx=300
 cy=400
+key=""
+
 root=tk.Tk()
 root.title("迷えるこうかとん")
 canvas=tk.Canvas(
