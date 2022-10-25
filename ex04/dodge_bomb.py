@@ -35,7 +35,11 @@ def main ():           #ゲーム画面
         pg.display.update()
         pg.time.Clock().tick(10000)
 
-        draw_rect.move_ip(vx,vy)    
+        draw_rect.move_ip(vx,vy)
+        if draw_rect.left<0 or draw_rect.right>1600:
+            vx=-vx
+        if draw_rect.top<0 or draw_rect.bottom>900:
+            vy=-vy    
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -43,13 +47,17 @@ def main ():           #ゲーム画面
                 sys.exit()
         pressed = pg.key.get_pressed()
         if pressed[pg.K_LEFT]:
-            tori_rect.move_ip(-1,0)
+            if tori_rect.left>0:
+                tori_rect.move_ip(-1,0)
         if pressed[pg.K_RIGHT]:
-            tori_rect.move_ip(1,0)
+            if tori_rect.right<1600:
+                tori_rect.move_ip(1,0)
         if pressed[pg.K_UP]:
-            tori_rect.move_ip(0,-1)
+            if tori_rect.top>0:
+                tori_rect.move_ip(0,-1)
         if pressed[pg.K_DOWN]:
-            tori_rect.move_ip(0,1)
+            if tori_rect.bottom<900:
+                tori_rect.move_ip(0,1)
 
 
 if __name__=="__main__":
