@@ -34,6 +34,9 @@ def main ():           #ゲーム画面
     
         pg.display.update()
         pg.time.Clock().tick(10000)
+
+        draw_rect.move_ip(vx,vy)    
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
