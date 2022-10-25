@@ -1,6 +1,5 @@
 import random
 import sys
-from codecs import BOM
 
 import pygame as pg
 
