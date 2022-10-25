@@ -17,10 +17,19 @@ def main ():           #ゲーム画面
     tori=pg.transform.rotozoom(tori,0,2.0)
     tori_rect=tori.get_rect()
     tori_rect.center=(toriX,toriY)
+
+    draw_sfc=pg.Surface((20,20))         #爆弾
+    drawX=random.randint(0,1600)
+    drawY=random.randint(0,900)
+    draw_sfc.set_colorkey("black")
+    draw_rect=pg.draw.circle(draw_sfc,(255,0,0),(10,10),10)
+    draw_rect.center=(drawX,drawY)
+    vx=vy=1
    
     while True:
         scrn_sfc.blit(bg, bg_rect)
         scrn_sfc.blit(tori,tori_rect)
+        scrn_sfc.blit(draw_sfc,draw_rect)
 
     
         pg.display.update()
