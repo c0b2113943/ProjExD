@@ -151,8 +151,8 @@ def main ():
                 HP8_rect.move_ip(0,1)
                 bom_rect.move_ip(0,1)
         
-        hanntei=tori_rect.colliderect(draw_rect)#爆弾と鳥の当たり判定
-        if hanntei:
+        #hanntei=tori_rect.colliderect(draw_rect)#爆弾と鳥の当たり判定
+        if tori_rect.colliderect(draw_rect):
             damezi+=1
         
         if damezi>=501:       #ダメージが501（約5回）当たったら処理を1.5秒停止し爆発している画面を見せている
