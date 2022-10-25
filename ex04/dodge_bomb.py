@@ -58,6 +58,10 @@ def main ():           #ゲーム画面
         if pressed[pg.K_DOWN]:
             if tori_rect.bottom<900:
                 tori_rect.move_ip(0,1)
+        
+        hanntei=tori_rect.colliderect(draw_rect)
+        if hanntei:
+            return
 
 
 if __name__=="__main__":
