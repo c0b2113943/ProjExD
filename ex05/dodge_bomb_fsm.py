@@ -1,6 +1,5 @@
 import random
 import sys
-from turtle import update
 
 import pygame as pg
 
@@ -109,12 +108,12 @@ class Ken:
                     self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
                 else:
                     self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
-                
-            if even.type == pg.KEYDOWN and even.key==pg.K_RIGHT:
+            key_states = pg.key.get_pressed()
+            if key_states[pg.K_RIGHT]and z!=1:
                 x=-90
                 z=1
                 self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
-            if even.type == pg.KEYUP and even.key==pg.K_RIGHT:
+            if key_states[pg.K_LEFT]and z!=0:
                 x=90
                 z=0
                 self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
@@ -137,8 +136,8 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
-
 def main():
+    pg.init()
     global enemy ,enemy2
     sc=Screen("逃げろこうかとん",(1600,900),"ex05\pg_bg.jpg")
     bird=Bird("fig/6.png",2.0,(900,400))
@@ -149,15 +148,14 @@ def main():
     enemy.append(bom2.bakudan_rect)
     enemy2.append(bom2.bakudan_sfc)
     ken=Ken(0.5,bird)
-    # time=pg.time.get_ticks()
-    # if time>=10000:
-    #     bom3=Bomb((255,0,0),25,(1,1),sc)
-    #     enemy.append(bom3.bakudan_rect)
-    #     enemy2.append(bom3.bakudan_sfc)
+   
+    bom3=Bomb((255,0,0),25,(1,1),sc)
+    enemy.append(bom3.bakudan_rect)
+    enemy2.append(bom3.bakudan_sfc)
  
 
     clock = pg.time.Clock() 
-
+    pg.time.set_timer(30,5000)
     while True:
         nsc=sc.blit()
         bird.blit(nsc)
@@ -166,26 +164,33 @@ def main():
         bom.update(nsc)
         bom2.blit(nsc)
         bom2.update(nsc)
+        bom3.blit(nsc)
+        bom3.update(nsc)
         ken.blit(nsc)
         ken.update(nsc,bird)
-        
-        for event in pg.event.get(): 
-            if event.type == pg.QUIT:
-                return
+
+        for event in pg.event.get():
+            if event.type == 30:
+                bom4=Bomb((255,0,0),25,(1,1),sc)
+                enemy.append(bom4.bakudan_rect)
+                enemy2.append(bom4.bakudan_sfc)
         
         if bird.gazou_rect.collidelist(enemy)!=-1:
+            return
+        key_states = pg.key.get_pressed()
+        if key_states[pg.K_ESCAPE]:
             return
 
 
         pg.display.update() 
         clock.tick(1000)
-
+       
 
 if __name__ == "__main__":
     enemy=[]
     enemy2=[]
     x,y,z=90,50,0
     pg.init() # 初期化
-    main()    # ゲームの本体
+    main()
     pg.quit() # 初期化の解除
     sys.exit()
