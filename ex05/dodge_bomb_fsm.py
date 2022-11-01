@@ -4,7 +4,7 @@ import sys
 import pygame as pg
 
 
-class Screen:
+class Screen:       #スクリーン用
     
     def __init__(self,title,wh,bgfile):
         pg.display.set_caption(title)  
@@ -18,7 +18,7 @@ class Screen:
         self.scrn_sfc.blit(self.bg_sfc,self.bg_rect)
         return self.scrn_sfc
             
-class Bird:
+class Bird:             #こうかとん用
     key_delta = {
     pg.K_UP:    [0, -2],
     pg.K_DOWN:  [0, +2],
@@ -52,7 +52,7 @@ class Bird:
         
         
 
-class Bomb:
+class Bomb:         #爆弾用
     def __init__(self,iro,hannkei,sokudo,sc):
         self.bakudan_sfc=pg.Surface((hannkei*2,hannkei*2))
         drawX=random.randint(sc.scrn_rect.left,sc.scrn_rect.right)
@@ -72,7 +72,7 @@ class Bomb:
         self.vy *= tate
         sc.blit(self.bakudan_sfc,self.bakudan_rect)
 
-class Ken:
+class Ken:    #剣用
     global enemy,enemy2
    
     
@@ -80,7 +80,7 @@ class Ken:
         self.gazou_sfc=pg.image.load("ex05/1.jpg")
         self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 0, bairitu)
         self.gazou_rect=self.gazou_sfc.get_rect()
-        self.gazou_rect.center=((bird.gazou_rect.centerx-90,bird.gazou_rect.centery-50))
+        self.gazou_rect.center=((bird.gazou_rect.centerx-90,bird.gazou_rect.centery-50))    #こうかとんの位置を使って更新
         self.bird1=bird
 
     def blit(self,sc):
@@ -93,26 +93,26 @@ class Ken:
             if even.type == pg.KEYDOWN and even.key==pg.K_SPACE:
                 y=-50
                 if z==0:
-                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)    #スペースキーで攻撃　左向き　　スイングの向きが違うため
                 else:
-                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)   #スペースキーで攻撃　右向き　
 
                 ans=self.gazou_rect.collidelistall(enemy)
-                for i in ans:
+                for i in ans:                                                   #攻撃した際に爆弾と剣の当たり判定を取る
                     enemy2[i].set_alpha(0)
                     del enemy[i]
                     del enemy2[i]
             if even.type == pg.KEYUP and even.key==pg.K_SPACE:
                 y=50
                 if z==0:
-                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)   #スペースキーを離したときで攻撃戻す　左向き　　スイングの向きが違うため
                 else:
-                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)    #スペースキーを離したとき攻撃戻す　右向き　　スイングの向きが違うため
             key_states = pg.key.get_pressed()
             if key_states[pg.K_RIGHT]and z!=1:
                 x=-90
                 z=1
-                self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+                self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)       #右キーが押されたとき剣を右向きにする
             if key_states[pg.K_LEFT]and z!=0:
                 x=90
                 z=0
@@ -177,7 +177,7 @@ def main():
         
         if bird.gazou_rect.collidelist(enemy)!=-1:
             return
-        key_states = pg.key.get_pressed()
+        key_states = pg.key.get_pressed()           #なぜかQite出来なかったのでエスケイプキーで終了
         if key_states[pg.K_ESCAPE]:
             return
 
