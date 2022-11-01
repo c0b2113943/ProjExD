@@ -1,5 +1,6 @@
 import random
 import sys
+from turtle import update
 
 import pygame as pg
 
@@ -20,11 +21,12 @@ class Screen:
             
 class Bird:
     key_delta = {
-    pg.K_UP:    [0, -1],
-    pg.K_DOWN:  [0, +1],
-    pg.K_LEFT:  [-1, 0],
-    pg.K_RIGHT: [+1, 0],
+    pg.K_UP:    [0, -2],
+    pg.K_DOWN:  [0, +2],
+    pg.K_LEFT:  [-2, 0],
+    pg.K_RIGHT: [+2, 0],
     }
+    tori=["fig/6.png","fig/6-1.png"]
 
     def __init__(self,filename,bairitu,syokiiti):
         self.gazou_sfc=pg.image.load(filename)
@@ -36,6 +38,7 @@ class Bird:
         sc.blit(self.gazou_sfc,self.gazou_rect)
     
     def update(self,sc):
+        global z
         key_states = pg.key.get_pressed()
         for key, delta in Bird.key_delta.items():
             if key_states[key]:
@@ -44,7 +47,11 @@ class Bird:
                 if check_bound(self.gazou_rect,sc.get_rect()) != (+1, +1):
                     self.gazou_rect.centerx -= delta[0]
                     self.gazou_rect.centery -= delta[1]  
+        self.gazou_sfc=pg.image.load(Bird.tori[z])
+        self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 0, 2.0)
         sc.blit(self.gazou_sfc,self.gazou_rect)
+        
+        
 
 class Bomb:
     def __init__(self,iro,hannkei,sokudo,sc):
@@ -66,6 +73,55 @@ class Bomb:
         self.vy *= tate
         sc.blit(self.bakudan_sfc,self.bakudan_rect)
 
+class Ken:
+    global enemy,enemy2
+   
+    
+    def __init__(self,bairitu,bird):
+        self.gazou_sfc=pg.image.load("ex05/1.jpg")
+        self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 0, bairitu)
+        self.gazou_rect=self.gazou_sfc.get_rect()
+        self.gazou_rect.center=((bird.gazou_rect.centerx-90,bird.gazou_rect.centery-50))
+        self.bird1=bird
+
+    def blit(self,sc):
+        sc.blit(self.gazou_sfc,self.gazou_rect)
+    
+    def update(self,sc,bird):
+        global x,y,z
+        #key_states = pg.key.get_pressed()
+        for even in pg.event.get():
+            if even.type == pg.KEYDOWN and even.key==pg.K_SPACE:
+                y=-50
+                if z==0:
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
+                else:
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+
+                ans=self.gazou_rect.collidelistall(enemy)
+                for i in ans:
+                    enemy2[i].set_alpha(0)
+                    del enemy[i]
+                    del enemy2[i]
+            if even.type == pg.KEYUP and even.key==pg.K_SPACE:
+                y=50
+                if z==0:
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+                else:
+                    self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
+                
+            if even.type == pg.KEYDOWN and even.key==pg.K_RIGHT:
+                x=-90
+                z=1
+                self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)
+            if even.type == pg.KEYUP and even.key==pg.K_RIGHT:
+                x=90
+                z=0
+                self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
+       
+        self.gazou_rect.center=((bird.gazou_rect.centerx-x,bird.gazou_rect.centery-y))
+        sc.blit(self.gazou_sfc,self.gazou_rect)
+
 
 
 def check_bound(obj_rct, scr_rct):
@@ -83,10 +139,22 @@ def check_bound(obj_rct, scr_rct):
 
 
 def main():
+    global enemy ,enemy2
     sc=Screen("逃げろこうかとん",(1600,900),"ex05\pg_bg.jpg")
     bird=Bird("fig/6.png",2.0,(900,400))
     bom=Bomb((255,0,0),25,(1,1),sc)
-    
+    bom2=Bomb((255,0,0),25,(1,1),sc)
+    enemy.append(bom.bakudan_rect)
+    enemy2.append(bom.bakudan_sfc)
+    enemy.append(bom2.bakudan_rect)
+    enemy2.append(bom2.bakudan_sfc)
+    ken=Ken(0.5,bird)
+    # time=pg.time.get_ticks()
+    # if time>=10000:
+    #     bom3=Bomb((255,0,0),25,(1,1),sc)
+    #     enemy.append(bom3.bakudan_rect)
+    #     enemy2.append(bom3.bakudan_sfc)
+ 
 
     clock = pg.time.Clock() 
 
@@ -96,18 +164,27 @@ def main():
         bird.update(nsc)
         bom.blit(nsc)
         bom.update(nsc)
-       
+        bom2.blit(nsc)
+        bom2.update(nsc)
+        ken.blit(nsc)
+        ken.update(nsc,bird)
         
         for event in pg.event.get(): 
             if event.type == pg.QUIT:
                 return
         
+        if bird.gazou_rect.collidelist(enemy)!=-1:
+            return
+
 
         pg.display.update() 
         clock.tick(1000)
 
 
 if __name__ == "__main__":
+    enemy=[]
+    enemy2=[]
+    x,y,z=90,50,0
     pg.init() # 初期化
     main()    # ゲームの本体
     pg.quit() # 初期化の解除
