@@ -169,11 +169,11 @@ def main():
         ken.blit(nsc)
         ken.update(nsc,bird)
 
-        for event in pg.event.get():
-            if event.type == 30:
-                bom4=Bomb((255,0,0),25,(1,1),sc)
-                enemy.append(bom4.bakudan_rect)
-                enemy2.append(bom4.bakudan_sfc)
+        # for event in pg.event.get():
+        #     if event.type == 30:
+        #         bom4=Bomb((255,0,0),25,(1,1),sc)
+        #         enemy.append(bom4.bakudan_rect)
+        #         enemy2.append(bom4.bakudan_sfc)
         
         if bird.gazou_rect.collidelist(enemy)!=-1:
             return
@@ -185,7 +185,6 @@ def main():
         pg.display.update() 
         clock.tick(1000)
        
-
 if __name__ == "__main__":
     enemy=[]
     enemy2=[]
