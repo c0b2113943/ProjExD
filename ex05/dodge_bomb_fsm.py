@@ -5,19 +5,18 @@ import pygame as pg
 
 
 class Screen:       #スクリーン用
-    
     def __init__(self,title,wh,bgfile):
         pg.display.set_caption(title)  
         self.scrn_sfc=pg.display.set_mode(wh)       #スクリーン用sfc
         self.scrn_rect=self.scrn_sfc.get_rect()     #スクリーン用Rect
         self.bg_sfc =pg.image.load(bgfile)     #背景Sfc
         self.bg_rect=self.bg_sfc.get_rect()         #背景Rect 
-  
-
+    
     def blit(self):
         self.scrn_sfc.blit(self.bg_sfc,self.bg_rect)
         return self.scrn_sfc
             
+
 class Bird:             #こうかとん用
     key_delta = {
     pg.K_UP:    [0, -2],
@@ -51,7 +50,6 @@ class Bird:             #こうかとん用
         sc.blit(self.gazou_sfc,self.gazou_rect)
         
         
-
 class Bomb:         #爆弾用
     def __init__(self,iro,hannkei,sokudo,sc):
         self.bakudan_sfc=pg.Surface((hannkei*2,hannkei*2))
@@ -74,8 +72,6 @@ class Bomb:         #爆弾用
 
 class Ken:    #剣用
     global enemy,enemy2
-   
-    
     def __init__(self,bairitu,bird):
         self.gazou_sfc=pg.image.load("ex05/1.jpg")
         self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 0, bairitu)
@@ -117,10 +113,8 @@ class Ken:    #剣用
                 x=90
                 z=0
                 self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, 90, 1)
-       
         self.gazou_rect.center=((bird.gazou_rect.centerx-x,bird.gazou_rect.centery-y))
         sc.blit(self.gazou_sfc,self.gazou_rect)
-
 
 
 def check_bound(obj_rct, scr_rct):
@@ -136,26 +130,26 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
+
 def main():
     pg.init()
     global enemy ,enemy2
     sc=Screen("負けるな！こうかとん",(1600,900),"ex05\pg_bg.jpg")
     bird=Bird("fig/6.png",2.0,(900,400))
+    ken=Ken(0.5,bird)
+
     bom=Bomb((255,0,0),25,(1,1),sc)
     bom2=Bomb((255,0,0),25,(1,1),sc)
+    bom3=Bomb((255,0,0),25,(1,1),sc)
     enemy.append(bom.bakudan_rect)
     enemy2.append(bom.bakudan_sfc)
     enemy.append(bom2.bakudan_rect)
     enemy2.append(bom2.bakudan_sfc)
-    ken=Ken(0.5,bird)
-   
-    bom3=Bomb((255,0,0),25,(1,1),sc)
     enemy.append(bom3.bakudan_rect)
     enemy2.append(bom3.bakudan_sfc)
- 
-
     clock = pg.time.Clock() 
     pg.time.set_timer(30,5000)
+    
     while True:
         nsc=sc.blit()
         bird.blit(nsc)
@@ -180,7 +174,6 @@ def main():
         key_states = pg.key.get_pressed()           #なぜかQite出来なかったのでエスケイプキーで終了
         if key_states[pg.K_ESCAPE]:
             return
-
 
         pg.display.update() 
         clock.tick(1000)
