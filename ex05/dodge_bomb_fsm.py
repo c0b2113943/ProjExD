@@ -139,7 +139,7 @@ def check_bound(obj_rct, scr_rct):
 def main():
     pg.init()
     global enemy ,enemy2
-    sc=Screen("逃げろこうかとん",(1600,900),"ex05\pg_bg.jpg")
+    sc=Screen("負けるな！こうかとん",(1600,900),"ex05\pg_bg.jpg")
     bird=Bird("fig/6.png",2.0,(900,400))
     bom=Bomb((255,0,0),25,(1,1),sc)
     bom2=Bomb((255,0,0),25,(1,1),sc)
