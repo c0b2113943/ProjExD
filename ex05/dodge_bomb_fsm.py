@@ -98,7 +98,7 @@ class Ken:    #剣用
                     self.gazou_sfc= pg.transform.rotozoom(self.gazou_sfc, -90, 1)   #スペースキーで攻撃　右向き　
 
                 ans=self.gazou_rect.collidelistall(enemy)
-                for i in ans:                                                   #攻撃した際に爆弾と剣の当たり判定を取る
+                for i in ans:                                                   #攻撃した際に爆弾と剣の当たり判定を取る 
                     enemy2[i].set_alpha(0)
                     del enemy[i]
                     del enemy2[i]
